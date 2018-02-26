@@ -1,0 +1,73 @@
+{
+  "apiVersion": "vlabs",
+  "properties": {
+    "orchestratorProfile": {
+      "orchestratorType": "Kubernetes",
+      "kubernetesConfig": {
+	"etcdDiskSizeGB": "2047",
+	"networkPolicy": "none",
+        "cloudProviderBackoff": true,
+        "cloudProviderBackoffRetries": 6,
+        "cloudProviderBackoffJitter": 1,
+        "cloudProviderBackoffDuration": 6,
+        "cloudProviderBackoffExponent": 1.5,
+        "cloudProviderRateLimit": true,
+        "cloudProviderRateLimitQPS": 3,
+        "cloudProviderRateLimitBucket": 10,
+        "kubeletConfig": {
+          "--node-status-update-frequency": "1m"
+        },
+        "controllerManagerConfig": {
+          "--node-monitor-grace-period": "5m",
+	  "--route-reconciliation-period" : "3m",
+          "--pod-eviction-timeout": "1m"
+        }
+      }
+    },
+    "masterProfile": {
+      "count": 3,
+      "dnsPrefix": "luxor",
+      "vmSize": "Standard_DS4_v2"
+    },
+    "agentPoolProfiles": [
+      {
+        "name": "pool1",
+        "count": 25,
+        "vmSize": "Standard_DS3_v2",
+        "availabilityProfile": "AvailabilitySet"
+      },
+      {
+        "name": "pool2",
+        "count": 25,
+        "vmSize": "Standard_DS3_v2",
+        "availabilityProfile": "AvailabilitySet"
+      },
+      {
+        "name": "pool3",
+        "count": 25,
+        "vmSize": "Standard_DS3_v2",
+        "availabilityProfile": "AvailabilitySet"
+      },
+      {
+        "name": "pool4",
+        "count": 25,
+        "vmSize": "Standard_DS3_v2",
+        "availabilityProfile": "AvailabilitySet"
+      } 
+    ],
+    "linuxProfile": {
+      "adminUsername": "khenidak",
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData":"" 
+          }
+        ]
+      }
+    },
+    "servicePrincipalProfile": {
+      "clientId": "",
+      "secret": ""
+    }
+  }
+}
